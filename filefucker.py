@@ -137,7 +137,6 @@ if __name__ == "__main__":
     print(f"Working between {start} and {end}. Corrupting {count} bytes.")
 
     hash(data, "Input")
-    print(count)
     fuck_shit_up(data, count, start, end)
     if not args.output:
         file_write(args.file, data)
