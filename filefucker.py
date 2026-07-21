@@ -129,7 +129,7 @@ if __name__ == "__main__":
     hash(data, "Input")
     count = parse_size(args.count)
     print(count)
-    fuck_shit_up(data, count, args.start, end)
+    fuck_shit_up(data, count, parse_size(args.start), end)
     if not args.output:
         file_write(args.file, data)
     else:
