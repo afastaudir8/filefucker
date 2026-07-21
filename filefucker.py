@@ -17,8 +17,8 @@ def arg_parser():
     parser.add_argument('file', help="File to corrupt", type=str)
     parser.add_argument("-y", "--yes", action='store_true', help="Skips confirmation prompts")
     parser.add_argument("-c", "--count", type=str, default=10 ,help="The number of bytes the script should corrupt. You can add K, M, or G to indicate kilobytes, etc. 1K = 1000. Default is 10")
-    parser.add_argument("-s", "--start", type=int, default=256000 ,help="Where the script should start from in bytes. Default is 256000")
-    parser.add_argument("-e", "--end", type=int, help="Where to end the corruption. End of file by default")
+    parser.add_argument("-s", "--start", type=str, default=256000 ,help="Where the script should start from in bytes. Default is 256000")
+    parser.add_argument("-e", "--end", type=str, help="Where to end the corruption. End of file by default")
     parser.add_argument("-o", "--output", type=str)
     return parser.parse_args()
 
@@ -33,6 +33,7 @@ def arg_parser():
 #         print("error: file not found")
 #         exit(1)
 def end_check(data, end):
+    end = parse_size(end)
     if not end or end > len(data):
         end = len(data)
     return end
@@ -76,9 +77,9 @@ def parse_size(size):
     try:
         return int(size)
     except ValueError:
-        if re.match("^[0-9]+[KMGkmg]$", size):
+        if re.match("^[0-9]+(\\.[0-9+])?[KMGkmg]$", size):
             unit = size[-1]
-            size = int(size[:-1])
+            size = float(size[:-1])
             match unit:
                 case "K" | "k":
                     return int(size * 1000)
