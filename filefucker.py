@@ -19,6 +19,7 @@ def arg_parser():
     parser.add_argument("-c", "--count", type=str, default=10 ,help="The number of bytes the script should corrupt. You can add K, M, or G to indicate kilobytes, etc. 1K = 1000. Default is 10")
     parser.add_argument("-s", "--start", type=str, default=256000 ,help="Where the script should start from in bytes. Default is 256000")
     parser.add_argument("-e", "--end", type=str, help="Where to end the corruption. End of file by default")
+    parser.add_argument("-S", "--silent", action="store_true", help="Run somewhat silently (no progress bars)")
     parser.add_argument("-o", "--output", type=str)
     return parser.parse_args()
 
@@ -123,12 +124,19 @@ if __name__ == "__main__":
             print("Exiting.")
             exit(1)
     print(f"Starting on file {args.file}")
-    start = parse_size(args.start)
+    
+    if args.silent:
+        barInstalled = False
+
     data = file_open(args.file)
+    start = parse_size(args.start)
     end = end_check(data, args.end)
     sanity_check(start, end)
-    hash(data, "Input")
     count = parse_size(args.count)
+    
+    print(f"Working between {start} and {end}. Corrupting {count} bytes.")
+
+    hash(data, "Input")
     print(count)
     fuck_shit_up(data, count, start, end)
     if not args.output:
