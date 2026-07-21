@@ -123,13 +123,14 @@ if __name__ == "__main__":
             print("Exiting.")
             exit(1)
     print(f"Starting on file {args.file}")
+    start = parse_size(args.start)
     data = file_open(args.file)
     end = end_check(data, args.end)
-    sanity_check(args.start, end)
+    sanity_check(start, end)
     hash(data, "Input")
     count = parse_size(args.count)
     print(count)
-    fuck_shit_up(data, count, parse_size(args.start), end)
+    fuck_shit_up(data, count, start, end)
     if not args.output:
         file_write(args.file, data)
     else:
