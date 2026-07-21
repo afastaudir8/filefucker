@@ -81,11 +81,11 @@ def parse_size(size):
             size = int(size[:-1])
             match unit:
                 case "K" | "k":
-                    return size * 1000
+                    return int(size * 1000)
                 case "M" | "m":
-                    return size * 1000000
+                    return int(size * 1000000)
                 case "G" | "g":
-                    return size * 1000000000
+                    return int(size * 1000000000)
         else:
             print("error: not a valid number")
 
@@ -126,7 +126,8 @@ if __name__ == "__main__":
     end = end_check(data, args.end)
     sanity_check(args.start, end)
     hash(data, "Input")
-    count = parse_size
+    count = parse_size(args.count)
+    print(count)
     fuck_shit_up(data, count, args.start, end)
     if not args.output:
         file_write(args.file, data)
