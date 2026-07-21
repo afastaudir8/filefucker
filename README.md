@@ -2,7 +2,7 @@
 
 ## The finest fucker of files
 
-This is a Python utility (if you can even call it that) that corrupts files by writing replacing random bytes to them.
+This is a Python utility (3.10+) (if you can even call it that) that corrupts files by writing replacing random bytes to them.
 
 I built this specifically for corrupting PSX BIOS files and games, but it will work for any file.
 
