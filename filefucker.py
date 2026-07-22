@@ -50,7 +50,7 @@ def sanity_check(start, end):
         print("error: start is negative")
         exit(1)
 
-def file_write(file, data):
+def file_write(file, data, start):
     try:
         with open(file, "r+b") as f:
             f.seek(start)
@@ -69,7 +69,7 @@ def file_write(file, data):
 
 def fuck_shit_up(data, count):
     for y in tqdm(range(count)) if barInstalled else range(count):
-        i = random.randint(start, end)
+        i = random.randint(data[0], data[-1])
         data[i] = random.randint(0, 255)
     hash(data, "Output")
     return data
@@ -151,7 +151,7 @@ if __name__ == "__main__":
     print(f"Working between {start} and {end}. Corrupting {count} bytes.")
 
     hash(data, "Input")
-    fuck_shit_up(data, count, start, end)
+    fuck_shit_up(data, count)
     if not args.output:
         file_write(args.file, data, start)
     else:
