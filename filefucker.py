@@ -133,11 +133,11 @@ if __name__ == "__main__":
     if args.silent:
         barInstalled = False
 
-    data = file_open(args.file)
-    exit(256)
     start = parse_size(args.start)
     end = end_check(data, args.end)
     sanity_check(start, end)
+    data = file_open(args.file, start, end)
+    exit(256)
     count = parse_size(args.count)
     
     print(f"Working between {start} and {end}. Corrupting {count} bytes.")
