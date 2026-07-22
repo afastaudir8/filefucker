@@ -135,6 +135,7 @@ if __name__ == "__main__":
 
     start = parse_size(args.start)
     # end = end_check(data, args.end)
+    end = parse_size(args.end)
     sanity_check(start, end)
     data = file_open(args.file, start, end)
     exit(256)
