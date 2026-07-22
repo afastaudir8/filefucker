@@ -1,6 +1,6 @@
 import argparse
 import random
-import hashlib
+# import hashlib
 import os
 import re
 import time
@@ -72,7 +72,7 @@ def fuck_shit_up(data, count):
     for y in tqdm(range(count)) if barInstalled else range(count):
         i = random.randint(data[0], data[-1])
         data[i] = random.randint(0, 255)
-    hash(data, "Output")
+    # hash(data, "Output")
     return data
 
 def hash(data, type):
@@ -153,7 +153,7 @@ if __name__ == "__main__":
 
     print(f"Working between {start} and {end}. Corrupting {count} bytes.")
 
-    hash(data, "Input")
+    # hash(data, "Input")
     fuck_shit_up(data, count)
     if not args.output:
         file_write(args.file, data, start)
