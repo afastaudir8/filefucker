@@ -92,16 +92,20 @@ def parse_size(size):
         else:
             print("error: not a valid number")
 
-def file_open(file):
+def file_open(file, start, end):
     try:
         with open(file, "rb") as f:
+            f.seek(start)
             if barInstalled:
                 data = bytearray()
                 size = os.path.getsize(file)
                 with tqdm(total=size, unit="B", unit_scale=True) as bar:
-                    while chunk := f.read(1024):
-                        data.extend(chunk)
-                        bar.update(len(chunk))
+                    for i in end - start:
+                        data.extend(i)
+                        bar.update(i)
+                    # while chunk := f.read(1024):
+                    #     data.extend(chunk)
+                    #     bar.update(len(chunk))
             else:
                 data = bytearray(f.read())
             f.close()
