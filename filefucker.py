@@ -107,6 +107,8 @@ def file_open(file, start, end):
 
                     while remaining > 0:
                         chunk = f.read(1024)
+                        if not chunk:
+                            break
                         data.extend(chunk)
                         remaining -= len(chunk)
                         bar.update(len(chunk))
