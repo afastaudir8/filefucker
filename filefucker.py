@@ -48,21 +48,21 @@ def sanity_check(start, end):
         print("error: start is negative")
         exit(1)
 
-# def file_write(file, data):
-#     try:
-#         with open(file, "wb") as f:
-#             if barInstalled:
-#                 with tqdm(total=len(data), unit="B", unit_scale=True) as bar:
-#                     for i in range(0, len(data), 1024):
-#                         chunk = data[i:i + 1024]
-#                         f.write(chunk)
-#                         bar.update(len(chunk))
-#             else:
-#                 f.write(data)
-#             f.close()
-#     except IOError:
-#         print("error: I/O error")
-#         exit(1)
+def file_write(file, data):
+    try:
+        with open(file, "wb") as f:
+            if barInstalled:
+                with tqdm(total=len(data), unit="B", unit_scale=True) as bar:
+                    for i in range(0, len(data), 1024):
+                        chunk = data[i:i + 1024]
+                        f.write(chunk)
+                        bar.update(len(chunk))
+            else:
+                f.write(data)
+            f.close()
+    except IOError:
+        print("error: I/O error")
+        exit(1)
 
 def fuck_shit_up(data, count, start, end):
     for y in tqdm(range(count)) if barInstalled else range(count):
@@ -92,26 +92,26 @@ def parse_size(size):
         else:
             print("error: not a valid number")
 
-# def file_open(file):
-#     try:
-#         with open(file, "rb") as f:
-#             if barInstalled:
-#                 data = bytearray()
-#                 size = os.path.getsize(file)
-#                 with tqdm(total=size, unit="B", unit_scale=True) as bar:
-#                     while chunk := f.read(1024):
-#                         data.extend(chunk)
-#                         bar.update(len(chunk))
-#             else:
-#                 data = bytearray(f.read())
-#             f.close()
-#             return data
-#     except FileNotFoundError:
-#         print("error: file not found")
-#         exit(1)
-#     except IOError:
-#         print("error: problem with file")
-#         exit(1)
+def file_open(file):
+    try:
+        with open(file, "rb") as f:
+            if barInstalled:
+                data = bytearray()
+                size = os.path.getsize(file)
+                with tqdm(total=size, unit="B", unit_scale=True) as bar:
+                    while chunk := f.read(1024):
+                        data.extend(chunk)
+                        bar.update(len(chunk))
+            else:
+                data = bytearray(f.read())
+            f.close()
+            return data
+    except FileNotFoundError:
+        print("error: file not found")
+        exit(1)
+    except IOError:
+        print("error: problem with file")
+        exit(1)
 
 
 if __name__ == "__main__":
