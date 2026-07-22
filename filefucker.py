@@ -35,10 +35,13 @@ def arg_parser():
 #         print("error: file not found")
 #         exit(1)
 def end_check(data, end):
-    if not end or int(end) > len(data):
-        end = len(data)
-    else:
-        end = parse_size(end)
+    try:
+        if not end or int(end) > len(data):
+            end = len(data)
+        else:
+            end = parse_size(end)
+    except ValueError:
+            end = parse_size(end)
     return end
 
 def sanity_check(start, end):
