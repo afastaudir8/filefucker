@@ -67,7 +67,7 @@ def file_write(file, data):
         print("error: I/O error")
         exit(1)
 
-def fuck_shit_up(data, count, start, end):
+def fuck_shit_up(data, count):
     for y in tqdm(range(count)) if barInstalled else range(count):
         i = random.randint(start, end)
         data[i] = random.randint(0, 255)
