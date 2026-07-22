@@ -98,11 +98,15 @@ def file_open(file, start, end):
             f.seek(start)
             if barInstalled:
                 data = bytearray()
-                size = os.path.getsize(file)
-                with tqdm(total=size, unit="B", unit_scale=True) as bar:
-                    for i in range(end - start):
-                        data.extend(f.read(i))
-                        bar.update(i)
+                size = end-start
+                with tqdm(total=size, unit="B", unit_scale=True, leave=True) as bar:
+                    remaining = size
+
+                    while remaining > 0:
+                        chunk = f.read(1024)
+                        data.extend(chunk)
+                        remaining -= len(chunk)
+                        bar.update(len(chunk))
                     # while chunk := f.read(1024):
                     #     data.extend(chunk)
                     #     bar.update(len(chunk))
@@ -138,7 +142,7 @@ if __name__ == "__main__":
     end = parse_size(args.end)
     sanity_check(start, end)
     data = file_open(args.file, start, end)
-    exit(256)
+    
     count = parse_size(args.count)
     
     print(f"Working between {start} and {end}. Corrupting {count} bytes.")
