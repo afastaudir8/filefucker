@@ -37,8 +37,8 @@ def arg_parser():
 #         print("error: file not found")
 #         exit(1)
 def end_check(file, end):
-    if not end or int(end) > len(data):
-        end = len(data)
+    if not end or int(end) > os.path.getsize(file):
+        end = os.path.getsize(file)
     else:
         end = parse_size(end)
     return end
