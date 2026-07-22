@@ -2,6 +2,7 @@ import argparse
 import random
 import hashlib
 import os
+import sys
 import re
 try:
     from tqdm import tqdm
@@ -116,6 +117,11 @@ def file_open(file):
 
 if __name__ == "__main__":
     print("FileFucker v1")
+
+    if sys.version_info.minor < 10 or sys.version_info.major < 3:
+        print("This version of FileFucker requires Python 3.10 or newer.")
+        exit(1)
+
     if not barInstalled:
         print("tqdm is not installed, running anyways")
     args = arg_parser()
