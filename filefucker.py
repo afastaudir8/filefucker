@@ -3,6 +3,8 @@ import random
 import hashlib
 import os
 import re
+from shutil import copy
+
 try:
     from tqdm import tqdm
     barInstalled = True
@@ -50,7 +52,8 @@ def sanity_check(start, end):
 
 def file_write(file, data):
     try:
-        with open(file, "wb") as f:
+        with open(file, "r+b") as f:
+            f.seek(start)
             if barInstalled:
                 with tqdm(total=len(data), unit="B", unit_scale=True) as bar:
                     for i in range(0, len(data), 1024):
@@ -150,9 +153,10 @@ if __name__ == "__main__":
     hash(data, "Input")
     fuck_shit_up(data, count, start, end)
     if not args.output:
-        file_write(args.file, data)
+        file_write(args.file, data, start)
     else:
-        file_write(args.output, data)
+        shutil.copy(args.file, args.output)
+        file_write(args.output, data, start)
     print("We're done here.")
 
 
