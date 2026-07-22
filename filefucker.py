@@ -100,8 +100,8 @@ def file_open(file, start, end):
                 data = bytearray()
                 size = os.path.getsize(file)
                 with tqdm(total=size, unit="B", unit_scale=True) as bar:
-                    for i in end - start:
-                        data.extend(i)
+                    for i in range(end - start):
+                        data.extend(f.read(i))
                         bar.update(i)
                     # while chunk := f.read(1024):
                     #     data.extend(chunk)
