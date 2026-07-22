@@ -3,6 +3,7 @@ import random
 import hashlib
 import os
 import re
+import time
 from shutil import copy
 
 try:
@@ -102,11 +103,11 @@ def file_open(file, start, end):
             if barInstalled:
                 data = bytearray()
                 size = end-start
-                with tqdm(total=size, unit="B", unit_scale=True, leave=True) as bar:
+                with tqdm(total=size, unit="B", unit_scale=True) as bar:
                     remaining = size
 
                     while remaining > 0:
-                        chunk = f.read(1024)
+                        chunk = f.read(min(1024, remaining))
                         if not chunk:
                             break
                         data.extend(chunk)
@@ -149,7 +150,7 @@ if __name__ == "__main__":
     data = file_open(args.file, start, end)
     
     count = parse_size(args.count)
-    
+
     print(f"Working between {start} and {end}. Corrupting {count} bytes.")
 
     hash(data, "Input")
