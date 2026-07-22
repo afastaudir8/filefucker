@@ -27,15 +27,6 @@ def arg_parser():
     return parser.parse_args()
 
 
-
-
-# def file_check(file):
-#     try:
-#         with open(file, "rb") as f:
-#             f.read()
-#     except FileNotFoundError:
-#         print("error: file not found")
-#         exit(1)
 def end_check(file, end):
     if not end or int(end) > os.path.getsize(file):
         end = os.path.getsize(file)
