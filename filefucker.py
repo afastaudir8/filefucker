@@ -36,7 +36,7 @@ def arg_parser():
 #     except FileNotFoundError:
 #         print("error: file not found")
 #         exit(1)
-def end_check(data, end):
+def end_check(file, end):
     if not end or int(end) > len(data):
         end = len(data)
     else:
@@ -144,8 +144,8 @@ if __name__ == "__main__":
         barInstalled = False
 
     start = parse_size(args.start)
-    # end = end_check(data, args.end)
-    end = parse_size(args.end)
+    end = end_check(args.file, args.end)
+    # end = parse_size(args.end)
     sanity_check(start, end)
     data = file_open(args.file, start, end)
     
@@ -153,8 +153,9 @@ if __name__ == "__main__":
 
     print(f"Working between {start} and {end}. Corrupting {count} bytes.")
 
-    # hash(data, "Input")
+    # hash(data, "Input"
     fuck_shit_up(data, count)
+    print("Writing...")
     if not args.output:
         file_write(args.file, data, start)
     else:
