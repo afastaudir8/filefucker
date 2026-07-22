@@ -134,6 +134,7 @@ if __name__ == "__main__":
         barInstalled = False
 
     data = file_open(args.file)
+    exit(256)
     start = parse_size(args.start)
     end = end_check(data, args.end)
     sanity_check(start, end)
