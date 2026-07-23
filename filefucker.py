@@ -109,7 +109,7 @@ def file_open(file, start, end):
                     #     data.extend(chunk)
                     #     bar.update(len(chunk))
             else:
-                data = bytearray(f.read())
+                data = bytearray(f.read(end - start))
             f.close()
             return data
     except FileNotFoundError:
