@@ -63,7 +63,7 @@ def file_write(file, data):
 
 def fuck_shit_up(data, count):
     for y in tqdm(range(count)) if barInstalled else range(count):
-        i = random.randint(data[0], data[-1])
+        i = random.randint(0, len(data)-1)
         data[i] = random.randint(0, 255)
     # hash(data, "Output")
     return data
