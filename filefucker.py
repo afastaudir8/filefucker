@@ -121,6 +121,7 @@ def file_open(file):
 
 if __name__ == "__main__":
     print("FileFucker v1")
+    print("Made with ♥ by afastaudir8")
 
     if sys.version_info.minor < 10 or sys.version_info.major < 3:
         print("This version of FileFucker requires Python 3.10 or newer.")
