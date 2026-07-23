@@ -46,10 +46,10 @@ def end_check(data, end):
 
 def sanity_check(start, end):
     if end < start:
-        print("error: end is smaller than start")
+        print(f"{colours[1]}error: end is smaller than start{colours[0]}")
         exit(1)
     if start < 0:
-        print("error: start is negative")
+        print(f"{colours[1]}error: start is negative{colours[0]}")
         exit(1)
 
 def file_write(file, data):
@@ -65,7 +65,7 @@ def file_write(file, data):
                 f.write(data)
             f.close()
     except IOError:
-        print("error: I/O error")
+        print(f"{colours[1]}error: I/O error{colours[0]}")
         exit(1)
 
 def fuck_shit_up(data, count, start, end):
@@ -128,7 +128,7 @@ if __name__ == "__main__":
     colours = ["\033[0m", "\033[0;31m", "\033[0;32m", "\033[0;33m"]
 
     if sys.version_info.minor < 10 or sys.version_info.major < 3:
-        print("This version of FileFucker requires Python 3.10 or newer.")
+        print(f"{colours[1]}This version of FileFucker requires Python 3.10 or newer.{colours[0]}")
         exit(1)
 
     if not barInstalled:
@@ -164,7 +164,7 @@ if __name__ == "__main__":
         file_write(args.file, data)
     else:
         file_write(args.output, data)
-    print("We're done here.")
+    print(f"{colours[3]}We're done here.{colours[0]}")
 
 
 
