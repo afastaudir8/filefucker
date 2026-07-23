@@ -173,7 +173,7 @@ if __name__ == "__main__":
         fuck_shit_up(data, count)
     print("Writing...")
     if not args.output:
-        file_write(args.file, data, start)
+        file_write(args.file, data)
     else:
         shutil.copy(args.file, args.output)
         file_write(args.output, data)
