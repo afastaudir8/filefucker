@@ -13,7 +13,7 @@ except ModuleNotFoundError:
 def arg_parser():
     parser = argparse.ArgumentParser(
         prog='FileFucker',
-        description='Corrupts random bits in a file. Meant for corrupting PSX BIOS files.'
+        description='Corrupts random bytes in a file.'
     )
     parser.add_argument('file', help="File to corrupt", type=str)
     parser.add_argument("-y", "--yes", action='store_true', help="Skips confirmation prompts")
@@ -130,7 +130,7 @@ if __name__ == "__main__":
         print("tqdm is not installed, running anyways")
 
     args = arg_parser()
-    
+
     if (not args.yes) and ((not args.output) or os.path.exists(args.output)):
         answer = input(f"YOU HAVE ENTERED A COMMAND THAT *WILL* OVERWRITE THE FILE YOU ENTERED.\nARE YOU ABSOLUTELY SURE YOU WANT TO PROCEED WITH THIS COMMAND\nI AM IN NO WAY RESPONSIBLE FOR DAMAGE YOU MAY CAUSE WITH THIS SCRIPT.\nTYPE y IF YOU ACCEPT\n").lower()
         if answer != "y":
