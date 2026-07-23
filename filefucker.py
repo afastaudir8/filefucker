@@ -84,14 +84,14 @@ def parse_size(size):
         return int(size)
     except ValueError:
         if re.match("^[0-9]+(\\.[0-9+])?[KMGkmg]$", size):
-            unit = size[-1]
+            unit = str(size[-1]).upper()
             size = float(size[:-1])
             match unit:
-                case "K" | "k":
+                case "K":
                     return int(size * 1000)
-                case "M" | "m":
+                case "M":
                     return int(size * 1000000)
-                case "G" | "g":
+                case "G":
                     return int(size * 1000000000)
         else:
             print("error: not a valid number")
