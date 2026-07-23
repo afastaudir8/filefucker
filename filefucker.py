@@ -44,7 +44,7 @@ def sanity_check(start, end):
         print(f"{colours[1]}error: start is negative{colours[0]}")
         exit(1)
 
-def file_write(file, data, start):
+def file_write(file, data):
     try:
         with open(file, "r+b") as f:
             f.seek(start)
