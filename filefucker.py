@@ -143,7 +143,10 @@ if __name__ == "__main__":
     
     count = parse_size(args.count)
 
-    print(f"Working between {start} and {end}. Corrupting {count} bytes.")
+    if (args.sort):
+        print(f"Working between {start} and {end}. Sorting {end-start} bytes.")
+    else:
+        print(f"Working between {start} and {end}. Corrupting {count} bytes.")
 
     # hash(data, "Input"
     if args.sort:
