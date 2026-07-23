@@ -95,6 +95,7 @@ def parse_size(size):
                     return int(size * 1000000000)
         else:
             print("error: not a valid number")
+            exit(1)
 
 def file_open(file):
     try:
