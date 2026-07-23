@@ -147,7 +147,6 @@ if __name__ == "__main__":
 
     # hash(data, "Input"
     if args.sort:
-        print(len(data))
         data[:] = sorted(data)
     else:
         fuck_shit_up(data, count)
