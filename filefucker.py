@@ -94,7 +94,7 @@ def parse_size(size):
                 case "G":
                     return int(size * 1000000000)
         else:
-            print("error: not a valid number")
+            print(f"{colours[1]}error: not a valid number{colours[0]}")
             exit(1)
 
 def file_open(file):
@@ -112,10 +112,10 @@ def file_open(file):
             f.close()
             return data
     except FileNotFoundError:
-        print("error: file not found")
+        print(f"{colours[1]}error: file not found{colours[0]}")
         exit(1)
     except IOError:
-        print("error: problem with file")
+        print(f"{colours[1]}error: problem with file{colours[0]}")
         exit(1)
 
 
