@@ -123,7 +123,7 @@ def file_open(file, start, end):
 
 
 if __name__ == "__main__":
-    print("FileFucker v1")
+    print("FileFucker v2")
     print("Made with ♥ by afastaudir8")
 
     # in order:
