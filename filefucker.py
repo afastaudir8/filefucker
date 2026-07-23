@@ -125,7 +125,7 @@ if __name__ == "__main__":
 
     # in order:
     # reset, red, yellow, green
-    colours = ["\033[0m", "\033[0;31m", "\033[0;32m", "\033[0;33m"]
+    colours = ["\033[0m", "\033[0;31m", "\033[0;33m", "\033[0;32m"]
 
     if sys.version_info.minor < 10 or sys.version_info.major < 3:
         print(f"{colours[1]}This version of FileFucker requires Python 3.10 or newer.{colours[0]}")
