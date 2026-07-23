@@ -132,7 +132,7 @@ if __name__ == "__main__":
         exit(1)
 
     if not barInstalled:
-        print(f"{colours[1]}tqdm is not installed, running anyways{colours[0]}")
+        print(f"{colours[2]}tqdm is not installed, running anyways{colours[0]}")
 
     args = arg_parser()
 
