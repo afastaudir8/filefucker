@@ -2,6 +2,7 @@ import argparse
 import random
 # import hashlib
 import os
+import sys
 import re
 import time
 import shutil
@@ -15,7 +16,7 @@ except ModuleNotFoundError:
 def arg_parser():
     parser = argparse.ArgumentParser(
         prog='FileFucker',
-        description='Corrupts random bits in a file. Meant for corrupting PSX BIOS files.'
+        description='Corrupts random bytes in a file.'
     )
     parser.add_argument('file', help="File to corrupt", type=str)
     parser.add_argument("-y", "--yes", action='store_true', help="Skips confirmation prompts")
@@ -37,10 +38,10 @@ def end_check(file, end):
 
 def sanity_check(start, end):
     if end < start:
-        print("error: end is smaller than start")
+        print(f"{colours[1]}error: end is smaller than start{colours[0]}")
         exit(1)
     if start < 0:
-        print("error: start is negative")
+        print(f"{colours[1]}error: start is negative{colours[0]}")
         exit(1)
 
 def file_write(file, data, start):
@@ -57,7 +58,7 @@ def file_write(file, data, start):
                 f.write(data)
             f.close()
     except IOError:
-        print("error: I/O error")
+        print(f"{colours[1]}error: I/O error{colours[0]}")
         exit(1)
 
 def fuck_shit_up(data, count):
@@ -76,17 +77,18 @@ def parse_size(size):
         return int(size)
     except ValueError:
         if re.match("^[0-9]+(\\.[0-9+])?[KMGkmg]$", size):
-            unit = size[-1]
+            unit = str(size[-1]).upper()
             size = float(size[:-1])
             match unit:
-                case "K" | "k":
+                case "K":
                     return int(size * 1000)
-                case "M" | "m":
+                case "M":
                     return int(size * 1000000)
-                case "G" | "g":
+                case "G":
                     return int(size * 1000000000)
         else:
-            print("error: not a valid number")
+            print(f"{colours[1]}error: not a valid number{colours[0]}")
+            exit(1)
 
 def file_open(file, start, end):
     try:
@@ -113,20 +115,36 @@ def file_open(file, start, end):
             f.close()
             return data
     except FileNotFoundError:
-        print("error: file not found")
+        print(f"{colours[1]}error: file not found{colours[0]}")
         exit(1)
     except IOError:
-        print("error: problem with file")
+        print(f"{colours[1]}error: problem with file{colours[0]}")
         exit(1)
 
 
 if __name__ == "__main__":
     print("FileFucker v1")
+    print("Made with ♥ by afastaudir8")
+
+    # in order:
+    # reset, red, yellow, green
+    colours = ["\033[0m", "\033[0;31m", "\033[0;33m", "\033[0;32m"]
+
+    if sys.version_info.minor < 10 or sys.version_info.major < 3:
+        print(f"{colours[1]}This version of FileFucker requires Python 3.10 or newer.{colours[0]}")
+        exit(1)
+
     if not barInstalled:
-        print("tqdm is not installed, running anyways")
+        print(f"{colours[2]}tqdm is not installed, running anyways{colours[0]}")
+
     args = arg_parser()
+
     if (not args.yes) and ((not args.output) or os.path.exists(args.output)):
-        answer = input(f"YOU HAVE ENTERED A COMMAND THAT *WILL* OVERWRITE THE FILE YOU ENTERED.\nARE YOU ABSOLUTELY SURE YOU WANT TO PROCEED WITH THIS COMMAND\nI AM IN NO WAY RESPONSIBLE FOR DAMAGE YOU MAY CAUSE WITH THIS SCRIPT.\nTYPE y IF YOU ACCEPT\n").lower()
+        try:
+            answer = input(f"{colours[1]}YOU HAVE ENTERED A COMMAND THAT *WILL* OVERWRITE THE FILE YOU ENTERED.{colours[0]}\nARE YOU ABSOLUTELY SURE YOU WANT TO PROCEED WITH THIS COMMAND\nI AM IN NO WAY RESPONSIBLE FOR DAMAGE YOU MAY CAUSE WITH THIS SCRIPT.\nTYPE y IF YOU ACCEPT\n").lower()
+        except KeyboardInterrupt:
+            answer = "n"
+            print()
         if answer != "y":
             print("Exiting.")
             exit(1)
@@ -158,8 +176,8 @@ if __name__ == "__main__":
         file_write(args.file, data, start)
     else:
         shutil.copy(args.file, args.output)
-        file_write(args.output, data, start)
-    print("We're done here.")
+        file_write(args.output, data)
+    print(f"{colours[3]}We're done here.{colours[0]}")
 
 
 
