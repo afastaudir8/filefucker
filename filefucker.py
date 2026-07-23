@@ -123,12 +123,14 @@ if __name__ == "__main__":
     print("FileFucker v1")
     print("Made with ♥ by afastaudir8")
 
+    colours = ["\033[0m", "\033[0;31m", "\033[0;32m", "\033[0;33m"]
+
     if sys.version_info.minor < 10 or sys.version_info.major < 3:
         print("This version of FileFucker requires Python 3.10 or newer.")
         exit(1)
 
     if not barInstalled:
-        print("tqdm is not installed, running anyways")
+        print(f"{colours[1]}tqdm is not installed, running anyways{colours[0]}")
 
     args = arg_parser()
 
