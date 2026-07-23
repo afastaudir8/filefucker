@@ -132,7 +132,11 @@ if __name__ == "__main__":
     args = arg_parser()
 
     if (not args.yes) and ((not args.output) or os.path.exists(args.output)):
-        answer = input(f"YOU HAVE ENTERED A COMMAND THAT *WILL* OVERWRITE THE FILE YOU ENTERED.\nARE YOU ABSOLUTELY SURE YOU WANT TO PROCEED WITH THIS COMMAND\nI AM IN NO WAY RESPONSIBLE FOR DAMAGE YOU MAY CAUSE WITH THIS SCRIPT.\nTYPE y IF YOU ACCEPT\n").lower()
+        try:
+            answer = input(f"YOU HAVE ENTERED A COMMAND THAT *WILL* OVERWRITE THE FILE YOU ENTERED.\nARE YOU ABSOLUTELY SURE YOU WANT TO PROCEED WITH THIS COMMAND\nI AM IN NO WAY RESPONSIBLE FOR DAMAGE YOU MAY CAUSE WITH THIS SCRIPT.\nTYPE y IF YOU ACCEPT\n").lower()
+        except KeyboardInterrupt:
+            answer = "n"
+            print()
         if answer != "y":
             print("Exiting.")
             exit(1)
