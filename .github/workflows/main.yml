@@ -21,7 +21,27 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v4
         with:
-          name: filefucker
+          name: filefucker-linux
+          path: dist/
+  macOS-Executable:
+      runs-on: macos-latest
+      steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+      - name: Set up Python 3.13
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+      - name: Install dependencies
+        run: |
+          pip install tqdm pyinstaller
+      - name: Build using PyInstaller
+        run: |
+          pyinstaller --onefile filefucker.py
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: filefucker-macOS
           path: dist/
         
       
