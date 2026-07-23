@@ -23,6 +23,7 @@ def arg_parser():
     parser.add_argument("-s", "--start", type=str, default=256000 ,help="Where the script should start from in bytes. Default is 256000")
     parser.add_argument("-e", "--end", type=str, help="Where to end the corruption. End of file by default")
     parser.add_argument("-S", "--silent", action="store_true", help="Run somewhat silently (no progress bars)")
+    parser.add_argument("-r", "--sort", action="store_true", help="Runs the bytes through a sorting algorithm instead of the usual algorithm")
     parser.add_argument("-o", "--output", type=str)
     return parser.parse_args()
 
